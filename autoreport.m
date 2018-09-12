@@ -16,7 +16,8 @@ for i = 1:numel(files) - 1
         problems = [problems files(i)];
     end  
 end
-functions = setdiff(setdiff(mfiles, header), problems);
+problems = sort(problems);
+functions = sort(setdiff(setdiff(mfiles, header), problems));
 
 % Assemble the report text
 report = fileread(header{1});
@@ -62,7 +63,12 @@ fwrite(fileID, report);
 publish('report.m', 'format', 'latex');
 
 % Typeset the report to report.pdf using pdflatex
-if isunix
+% The platform-specific system calls for pdflatex are a first-pass
+% effort. If the path is different on your system, either edit
+% this function or symlink pdflatex to the given location.
+if ismac
+    system(['/Library/TeX/texbin/pdflatex', ' html/report.tex']);
+elseif isunix && ~ismac
     system('LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:LD_LIBRARY_PATH; export LD_LIBRARY_PATH; pdflatex html/report.tex');
 else
     system('pdflatex html/report.tex')
