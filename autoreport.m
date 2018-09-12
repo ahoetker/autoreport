@@ -24,6 +24,7 @@ for i = 1:numel(problems)
     report = strjoin({report fileread(problems{i})}, '\n\n');
 end
 
+% Append referenced functions from this directory to the report
 referenced_functions = {};
 for i = 1:numel(functions)
     funcstruct = strsplit(functions{i}, '.m');
@@ -32,7 +33,6 @@ for i = 1:numel(functions)
         referenced_functions = {referenced_functions, functions{i}};
     end
 end
-
 if numel(referenced_functions) > 0
     report = strjoin({report '%% Referenced Functions'}, '\n\n');
     for i = 2:numel(referenced_functions)
@@ -47,7 +47,6 @@ if numel(referenced_functions) > 0
                 comment = strjoin({comment comment_line}, '\n');
             end
         end
-%         report = strjoin({report fileread(referenced_functions{i})}, '\n\n');
         headline = strjoin({'%%' referenced_functions{i}}, ' '); 
         report = strjoin({report headline}, '\n\n');
         report = strjoin({report '%'}, '\n');
