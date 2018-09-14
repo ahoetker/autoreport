@@ -1,4 +1,20 @@
 function [] = autoreport()
+%AUTOREPORT Automatically construct, publish, and typeset homework
+% USAGE: `autoreport` in command window
+% FILES:
+%   header.m - The contents of this file are used as the header
+%   *problem*.m - Any such file is added to the problems section
+%       in alphabetical order by filename.
+%   *.m - Any m-file defining a function that was called in the
+%       problems section will be included in Referenced Functions
+%
+% OUTPUT: A typeset pdflatex PDF with the structure,
+%   - header
+%   - problem 1
+%   - problem 2 ...
+%   - Referenced Functions
+%   - function 1
+%   - function 2 ...
 
 % Choose the source files to add to the report
 files = split(ls);
@@ -6,7 +22,7 @@ mfiles = [];
 header = [];
 problems = [];
 for i = 1:numel(files) - 1
-    if contains(files(i), '.m')
+    if contains(files(i), '.m') && ~contains(files(i), '~')
         mfiles = [mfiles files(i)];
     end
     if contains(files(i), 'header.m')
