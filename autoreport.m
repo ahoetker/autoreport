@@ -25,10 +25,11 @@ for i = 1:numel(files) - 1
     if contains(files(i), '.m') && ~contains(files(i), '~')
         mfiles = [mfiles files(i)];
     end
-    if contains(files(i), 'header.m')
+    if contains(files(i), 'header.m') && ~contains(files(i), '~')
         header = [header files(i)];
     end
-    if contains(files(i), 'problem') && contains(files(i), '.m')
+    if contains(files(i), 'problem') && contains(files(i), '.m') ...
+            && ~contains(files(i), '~')
         problems = [problems files(i)];
     end  
 end
