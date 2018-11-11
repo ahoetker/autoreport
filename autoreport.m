@@ -85,7 +85,7 @@ publish('report.m', 'format', 'latex');
 % this function or symlink pdflatex to the given location.
 cd html
 if ismac
-    system(['/Library/TeX/texbin/pdflatex', '-halt-on-error', '-output-directory', '..', 'report.tex']);
+    system('/Library/TeX/texbin/pdflatex -halt-on-error -output-directory .. report.tex');
 elseif isunix && ~ismac
     system('LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:LD_LIBRARY_PATH; export LD_LIBRARY_PATH; pdflatex -halt-on-error -output-directory .. report.tex');
 else
