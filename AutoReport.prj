@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3491804510" file="/home/andrew/Projects/autoreport/AutoReport.prj" location="/home/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2030345037" file="/home/andrew/Projects/autoreport/AutoReport.prj" location="/home/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
     <param.appname>AutoReport</param.appname>
     <param.authnamewatermark>Andrew Hoetker</param.authnamewatermark>
     <param.email>ahoetker@me.com</param.email>
@@ -12,8 +12,8 @@
     </param.icons>
     <param.summary>Automatic report generation in MATLAB.</param.summary>
     <param.description>Automatically generate and typeset your homework! Run this app from the folder your homework files are in. The file "header.m" will be used as the header, and any m-file containing "problem" will be added in alphabetical order. If the source files for a function are present, and the function is called in the report, those functions will be appended as comments to the report.</param.description>
-    <param.screenshot />
-    <param.version>1.0.3</param.version>
+    <param.screenshot>${PROJECT_ROOT}/autoreport.png</param.screenshot>
+    <param.version>1.0.4</param.version>
     <param.products.name>
       <item>MATLAB</item>
     </param.products.name>
@@ -28,7 +28,6 @@
     <param.guid>04144a6e-5058-417a-8e1b-9f7b870ae716</param.guid>
     <unset>
       <param.company />
-      <param.screenshot />
       <param.platforms />
       <param.output />
     </unset>
@@ -55,7 +54,7 @@
       <vista>false</vista>
       <linux>true</linux>
       <solaris>false</solaris>
-      <osver>4.17.14-arch1-1-vfio-ARCH</osver>
+      <osver>4.18.9-arch1-1-vfio</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>glnxa64</arch>
