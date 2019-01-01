@@ -31,7 +31,7 @@ for i = 1:numel(files) - 1
     if contains(files(i), 'problem') && contains(files(i), '.m') ...
             && ~contains(files(i), '~')
         problems = [problems files(i)];
-    end  
+    end
 end
 problems = sort(problems);
 functions = sort(setdiff(setdiff(mfiles, header), problems));
@@ -65,7 +65,7 @@ if numel(referenced_functions) > 0
                 comment = strjoin({comment comment_line}, '\n');
             end
         end
-        headline = strjoin({'%%' referenced_functions{i}}, ' '); 
+        headline = strjoin({'%%' referenced_functions{i}}, ' ');
         report = strjoin({report headline}, '\n\n');
         report = strjoin({report '%'}, '\n');
         report = strjoin({report comment}, '\n');
@@ -79,18 +79,40 @@ fwrite(fileID, report);
 % Publish the report to html/report.tex
 publish('report.m', 'format', 'latex');
 
+% If preamble.tex present, modify report.tex to include
+fileID = fopen('preamble.tex', 'r');
+if fileID ~= -1
+    generated_report = fileread('html/report.tex');
+    [contents, delim] = strsplit(generated_report, '\\begin\{document\}',...
+        'DelimiterType', 'RegularExpression');
+    report_tex = strjoin({contents{1} '\input{preamble}'});
+    report_tex = strjoin({report_tex '\begin{document}' contents{2}});
+    texfileID = fopen('html/report.tex', 'w');
+    fwrite(texfileID, report_tex);
+end
+
+% Move custom tex files to html/
+for i = 1:numel(files) - 1
+    if contains(files(i), '.tex') && ~contains(files(i), '~')
+        [SUCCESS,MESSAGE,MESSAGEID] = copyfile(files{i}, 'html');
+        fprintf('%s: %s: %s\n', SUCCESS, MESSAGE, MESSAGEID);
+    end
+end
+
+
 % Typeset the report to report.pdf using pdflatex
 % The platform-specific system calls for pdflatex are a first-pass
 % effort. If the path is different on your system, either edit
 % this function or symlink pdflatex to the given location.
 cd html
 if ismac
-    system('/Library/TeX/texbin/pdflatex -halt-on-error -output-directory .. report.tex');
+    system('export PATH=$PATH:/Library/TeX/texbin:/opt/local/bin; latexmk -halt-on-error -outdir=.. -pdfxe report.tex');
 elseif isunix && ~ismac
-    system('LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:LD_LIBRARY_PATH; export LD_LIBRARY_PATH; pdflatex -halt-on-error -output-directory .. report.tex');
+    system('LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:LD_LIBRARY_PATH; export LD_LIBRARY_PATH; latexmk -halt-on-error -outdir=.. -pdfxe report.tex');
 else
-    system('pdflatex -halt-on-error -output-directory .. report.tex')
+    system('latexmk -halt-on-error -outdir=.. -pdfxe report.tex')
 end
+%delete('*.tex')
 cd ..
 
 
@@ -98,4 +120,8 @@ cd ..
 delete('report.m');
 delete('*.log');
 delete('*.aux');
+delete('*.fls');
+delete('*.fdb_latexmk');
+delete('*.xdv');
+delete('*.out');
 end
