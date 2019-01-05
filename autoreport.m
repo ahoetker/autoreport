@@ -42,7 +42,7 @@ for i = 1:numel(files) - 1
     end
 end
 problems = sort(problems);
-functions = sort(setdiff(setdiff(mfiles, header), problems));
+functions = sort(setdiff(mfiles, problems));
 
 % Initial sanity checks
 if numel(problems) < 0
