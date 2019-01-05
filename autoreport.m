@@ -148,6 +148,15 @@ end
 % effort. If the path is different on your system, either edit
 % this function or symlink pdflatex to the given location.
 cd html
+% Create version_footer.tex
+url_string = '\href{https://github.com/ahoetker/autoreport}{AutoReport}';
+vf_string = sprintf('\\rfoot{\\tiny{Published with Matlab %s and %s}}', version, url_string);
+file_ID = fopen('version_footer.tex', 'w');
+fwrite(file_ID, vf_string);
+if ispc
+    fclose(file_ID);
+end
+% Typeset using latexmk -> XeTeX
 if ismac
     system('export PATH=$PATH:/Library/TeX/texbin:/opt/local/bin; latexmk -halt-on-error -outdir=.. -pdfxe report.tex');
 elseif isunix && ~ismac

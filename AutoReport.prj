@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2879668749" file="/home/andrew/Projects/autoreport/AutoReport.prj" location="/home/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2585430461" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
     <param.appname>AutoReport</param.appname>
     <param.authnamewatermark>Andrew Hoetker</param.authnamewatermark>
     <param.email>ahoetker@me.com</param.email>
@@ -21,10 +21,10 @@
       <item>1</item>
     </param.products.id>
     <param.products.version>
-      <item>9.4</item>
+      <item>9.2</item>
     </param.products.version>
     <param.platforms />
-    <param.output>/home/andrew/Projects/autoreport</param.output>
+    <param.output>/Users/andrew/Projects/autoreport</param.output>
     <param.guid>04144a6e-5058-417a-8e1b-9f7b870ae716</param.guid>
     <unset>
       <param.company />
@@ -40,26 +40,57 @@
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="/home/andrew/Projects" name="autoreport" optional="false">/home/andrew/Projects/autoreport</file>
+      <file location="/Users/andrew/Projects" name="autoreport" optional="false">/Users/andrew/Projects/autoreport</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>/usr/local/MATLAB/R2018a</root>
-      <toolboxes />
+      <root>/Applications/MATLAB_R2017a.app</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="polyspacebugfinder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
     </matlab>
     <platform>
       <unix>true</unix>
-      <mac>false</mac>
+      <mac>true</mac>
       <windows>false</windows>
       <win2k>false</win2k>
       <winxp>false</winxp>
       <vista>false</vista>
-      <linux>true</linux>
+      <linux>false</linux>
       <solaris>false</solaris>
-      <osver>4.18.16-arch1-1-vfio</osver>
+      <osver>10.14</osver>
       <os32>false</os32>
       <os64>true</os64>
-      <arch>glnxa64</arch>
+      <arch>maci64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>

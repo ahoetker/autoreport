@@ -1,6 +1,10 @@
+% EDIT THIS SECTION
+\newcommand{\settitle}{REPORT TITLE}
+\newcommand{\setauthor}{AUTHOR NAME}
+%---------------------------------------------------%
 % Set document data
-\title{TITLE OF REPORT}
-\author{AUTHOR NAME}
+\title{\settitle}
+\author{\setauthor}
 %---------------------------------------------------%
 % Math stuff
 \usepackage{amsmath}
@@ -13,8 +17,14 @@
 % Header definition
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\lhead{AUTHOR NAME}
-\rhead{TITLE OF REPORT}
+\lhead{\setauthor}
+\rhead{\settitle}
+\input{version_footer}
+%---------------------------------------------------%
+% XeLaTeX Fonts
+\usepackage{unicode-math}
+\setmainfont{STIX2Text-Regular.otf}
+\setmathfont{STIX2Math.otf}
 %---------------------------------------------------%
 % Fancy references
 \usepackage{varioref}
