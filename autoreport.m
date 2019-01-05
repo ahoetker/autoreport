@@ -17,7 +17,15 @@ function [] = autoreport()
 %   - function 2 ...
 
 % Choose the source files to add to the report
-files = split(ls);
+if ismac || isunix
+    files = split(ls);
+else
+    files = [];
+    dir_struct = dir;
+    for i = 1:numel(dir_struct) - 1
+        files = [files string(dir_struct(i).name)];
+    end
+end
 mfiles = [];
 header = [];
 problems = [];
@@ -75,6 +83,9 @@ end
 % Write the full report text to report.m
 fileID = fopen('report.m', 'w+');
 fwrite(fileID, report);
+if ispc
+    fclose(fileID);
+end
 
 % Publish the report to html/report.tex
 publish('report.m', 'format', 'latex');
@@ -89,6 +100,9 @@ if fileID ~= -1
     report_tex = strjoin({report_tex '\begin{document}' contents{2}});
     texfileID = fopen('html/report.tex', 'w');
     fwrite(texfileID, report_tex);
+    if ispc
+        fclose(texfileID);
+    end
 end
 
 % Move custom tex files to html/
@@ -112,7 +126,6 @@ elseif isunix && ~ismac
 else
     system('latexmk -halt-on-error -outdir=.. -pdfxe report.tex')
 end
-%delete('*.tex')
 cd ..
 
 
@@ -124,4 +137,4 @@ delete('*.fls');
 delete('*.fdb_latexmk');
 delete('*.xdv');
 delete('*.out');
-end
+
