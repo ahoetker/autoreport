@@ -45,7 +45,7 @@ problems = sort(problems);
 functions = sort(setdiff(setdiff(mfiles, header), problems));
 
 % Initial sanity checks
-if numel(problems) < 1
+if numel(problems) < 0
     error('No problem m-files found.')
 end
 
@@ -102,9 +102,11 @@ publish('report.m', 'format', 'latex');
 % If preamble.tex present, make some modifications to the published LaTeX
 fileID = fopen('preamble.tex', 'r');
 if fileID == -1
-    %[SUCCESS,MESSAGE,MESSAGEID] = copyfile('example_preamble.tex', 'preamble.tex');
     preambleID = fopen('preamble.tex', 'w');
     fwrite(preambleID, fileread('example_preamble.tex'));
+    if ispc
+      fclose(preambleID);
+    end
     disp('No preamble.tex found, example has been placed in this directory')
     error('preamble.tex not found')
 else

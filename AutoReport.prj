@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="1855315429" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="4134345764" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
     <param.appname>AutoReport</param.appname>
     <param.authnamewatermark>Andrew Hoetker</param.authnamewatermark>
     <param.email>ahoetker@me.com</param.email>
