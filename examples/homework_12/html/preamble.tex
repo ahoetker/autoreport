@@ -1,0 +1,37 @@
+% EDIT THIS SECTION
+\newcommand{\settitle}{Example Homework Assignment}
+\newcommand{\setauthor}{Matrim Cauthon - ASUID\#1000000}
+%---------------------------------------------------%
+% Set document data
+\title{\settitle}
+\author{\setauthor}
+%---------------------------------------------------%
+% Math stuff
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%---------------------------------------------------%
+% Page layout
+\usepackage[margin=1in,paper=letterpaper,includeheadfoot]{geometry}
+%---------------------------------------------------%
+% Header definition
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\setauthor}
+\rhead{\settitle}
+\input{version_footer}
+%---------------------------------------------------%
+% XeLaTeX Fonts
+\usepackage{unicode-math}
+\setmainfont{STIX2Text-Regular.otf}
+\setmathfont{STIX2Math.otf}
+\setmonofont{Inconsolata}
+%---------------------------------------------------%
+% Fancy references
+\usepackage{varioref}
+\labelformat{equation}{equation~(#1)}
+%---------------------------------------------------%
+% Hyperlinks
+\usepackage{color}
+\definecolor{mygrey}{gray}{0.25}
+\usepackage[pdfborder=0, colorlinks=true, urlcolor=blue, linkcolor=mygrey]{hyperref}
