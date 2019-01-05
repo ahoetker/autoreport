@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2585430461" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2319583204" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
     <param.appname>AutoReport</param.appname>
     <param.authnamewatermark>Andrew Hoetker</param.authnamewatermark>
     <param.email>ahoetker@me.com</param.email>
@@ -13,7 +13,7 @@
     <param.summary>Automatic report generation in MATLAB.</param.summary>
     <param.description>Automatically generate your homework in MATLAB!</param.description>
     <param.screenshot>${PROJECT_ROOT}/autoreport.png</param.screenshot>
-    <param.version>1.1.0</param.version>
+    <param.version>1.1.1</param.version>
     <param.products.name>
       <item>MATLAB</item>
     </param.products.name>

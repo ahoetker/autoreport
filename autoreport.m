@@ -68,26 +68,29 @@ for i = 1:numel(functions)
         referenced_functions = {referenced_functions, functions{i}};
     end
 end
-if numel(referenced_functions) > 0
-    report = strjoin({report '%% Referenced Functions'}, '\n\n');
-    for i = 2:numel(referenced_functions)
-        comment = '';
-        fileID = fopen(referenced_functions{i}, 'r');
-        while true
-            comment_line = fgetl(fileID);
-            if ~ischar(comment_line)
-                break
-            else
-                comment_line = strjoin({'%   ' comment_line}, '');
-                comment = strjoin({comment comment_line}, '\n');
-            end
-        end
-        headline = strjoin({'%%' referenced_functions{i}}, ' ');
-        report = strjoin({report headline}, '\n\n');
-        report = strjoin({report '%'}, '\n');
-        report = strjoin({report comment}, '\n');
-    end
-end
+% if numel(referenced_functions) > 0
+%     report = strjoin({report '%% Referenced Functions'}, '\n\n');
+%     for i = 2:numel(referenced_functions)
+%         comment = '';
+%         fileID = fopen(referenced_functions{i}, 'r');
+%         while true
+%             comment_line = fgetl(fileID);
+%             if ~ischar(comment_line)
+%                 break
+%             else
+%                 comment_line = strjoin({'%   ' comment_line}, '');
+%                 comment = strjoin({comment comment_line}, '\n');
+%             end
+%         end
+%         headline = strjoin({'%%' referenced_functions{i}}, ' ');
+%         report = strjoin({report headline}, '\n\n');
+%         report = strjoin({report '%'}, '\n');
+%         report = strjoin({report comment}, '\n');
+%     end
+% end
+% Generate LaTeX for referenced functions
+
+
 
 % Write the full report text to report.m
 fileID = fopen('report.m', 'w+');
@@ -126,6 +129,18 @@ else
     out = regexp(out{2}, "\\end{itemize}", 'split');
     after = out{numel(out)};
     report_tex = strjoin({before after});
+    % Add a referenced functions section if necessary
+    if numel(referenced_functions) > 0
+        rfunc_text = '\section{Referenced Functions}';
+        for i = 2:numel(referenced_functions)
+            fn_subsection = sprintf('\\subsection{%s} \\begin{verbatim} %s \\end{verbatim}', referenced_functions{i}, ...
+                fileread(referenced_functions{i}));
+            rfunc_text = strjoin({rfunc_text fn_subsection});
+        end
+        out = regexp(report_tex, "\\end{document}", 'split')
+        before = out{1};
+        report_tex = strjoin({before rfunc_text '\end{document}'});
+    end
     % Write the changes to report.tex
     texfileID = fopen('html/report.tex', 'w');
     fwrite(texfileID, report_tex);
@@ -152,6 +167,7 @@ cd html
 url_string = '\href{https://github.com/ahoetker/autoreport}{AutoReport}';
 vf_string = sprintf('\\rfoot{\\tiny{Published with Matlab %s and %s}}', version, url_string);
 file_ID = fopen('version_footer.tex', 'w');
+% Create referenced_functions.
 fwrite(file_ID, vf_string);
 if ispc
     fclose(file_ID);
