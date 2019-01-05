@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3260562532" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1855315429" file="/Users/andrew/Projects/autoreport/AutoReport.prj" location="/Users/andrew/Projects/autoreport" name="AutoReport" target="target.mlapps" target-name="Package App">
     <param.appname>AutoReport</param.appname>
     <param.authnamewatermark>Andrew Hoetker</param.authnamewatermark>
     <param.email>ahoetker@me.com</param.email>
@@ -11,9 +11,9 @@
       <file>${PROJECT_ROOT}/AutoReport_resources/icon_16.png</file>
     </param.icons>
     <param.summary>Automatic report generation in MATLAB.</param.summary>
-    <param.description>Automatically generate and typeset your homework! Run this app from the folder your homework files are in. The file "header.m" will be used as the header, and any m-file containing "problem" will be added in alphabetical order. If the source files for a function are present, and the function is called in the report, those functions will be appended as comments to the report.</param.description>
+    <param.description>Automatically generate your homework in MATLAB!</param.description>
     <param.screenshot>${PROJECT_ROOT}/autoreport.png</param.screenshot>
-    <param.version>1.0.5</param.version>
+    <param.version>1.1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
     </param.products.name>
@@ -34,7 +34,9 @@
     <fileset.main>
       <file>${PROJECT_ROOT}/autoreport.m</file>
     </fileset.main>
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/example_preamble.tex</file>
+    </fileset.depfun>
     <fileset.resources />
     <fileset.package />
     <build-deliverables>

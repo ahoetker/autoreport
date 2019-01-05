@@ -44,8 +44,17 @@ end
 problems = sort(problems);
 functions = sort(setdiff(setdiff(mfiles, header), problems));
 
+% Initial sanity checks
+if numel(problems) < 1
+    error('No problem m-files found.')
+end
+
 % Assemble the report text
-report = fileread(header{1});
+if numel(header) > 0
+    report = fileread(header{1});
+else
+    report = '';
+end
 for i = 1:numel(problems)
     report = strjoin({report fileread(problems{i})}, '\n\n');
 end
@@ -90,14 +99,32 @@ end
 % Publish the report to html/report.tex
 publish('report.m', 'format', 'latex');
 
-% If preamble.tex present, modify report.tex to include
+% If preamble.tex present, make some modifications to the published LaTeX
 fileID = fopen('preamble.tex', 'r');
-if fileID ~= -1
+if fileID == -1
+    %[SUCCESS,MESSAGE,MESSAGEID] = copyfile('example_preamble.tex', 'preamble.tex');
+    preambleID = fopen('preamble.tex', 'w');
+    fwrite(preambleID, fileread('example_preamble.tex'));
+    disp('No preamble.tex found, example has been placed in this directory')
+    error('preamble.tex not found')
+else
     generated_report = fileread('html/report.tex');
     [contents, delim] = strsplit(generated_report, '\\begin\{document\}',...
         'DelimiterType', 'RegularExpression');
+    % Insert the contents of preamble.tex above \begin{document}
     report_tex = strjoin({contents{1} '\input{preamble}'});
-    report_tex = strjoin({report_tex '\begin{document}' contents{2}});
+    % Add \maketitle and \tableofcontents after \begin{document}
+    report_tex = strjoin({report_tex '\begin{document}' '\maketitle' '\tableofcontents' contents{2}});
+    % Make sections more sensible, add numbering
+    report_tex = replace(report_tex, "\section*", "");
+    report_tex = replace(report_tex, "\subsection*", "\section");
+    % Remove the MATLAB-generated Table of Contents
+    out = regexp(report_tex, "\\section{Contents}", 'split');
+    before = out{1};
+    out = regexp(out{2}, "\\end{itemize}", 'split');
+    after = out{numel(out)};
+    report_tex = strjoin({before after});
+    % Write the changes to report.tex
     texfileID = fopen('html/report.tex', 'w');
     fwrite(texfileID, report_tex);
     if ispc
@@ -137,4 +164,4 @@ delete('*.fls');
 delete('*.fdb_latexmk');
 delete('*.xdv');
 delete('*.out');
-
+delete('*.toc');

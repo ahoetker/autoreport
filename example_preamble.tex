@@ -1,0 +1,26 @@
+% Set document data
+\title{TITLE OF REPORT}
+\author{AUTHOR NAME}
+%---------------------------------------------------%
+% Math stuff
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%---------------------------------------------------%
+% Header definition
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{AUTHOR NAME}
+\rhead{TITLE OF REPORT}
+%---------------------------------------------------%
+% Fancy references
+\usepackage{varioref}
+\labelformat{equation}{equation~(#1)}
+%---------------------------------------------------%
+% Hyperlinks
+\usepackage{color}
+\definecolor{mygrey}{gray}{0.25}
+\usepackage[pdfborder=0, colorlinks=true, urlcolor=blue, linkcolor=mygrey]{hyperref}
+%---------------------------------------------------%
+% Page layout
+\usepackage[margin=1in,paper=letterpaper,includeheadfoot]{geometry}
