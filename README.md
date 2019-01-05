@@ -1,7 +1,7 @@
 # autoreport
 
 Automatically generate a LaTeX PDF from your homework problems! autoreport
-will choose the file `header.m` to be the header of the report, and include
+will include
 all m-files whose names inlude "problem" in the report. If a function is called
 in the report and its source file is in the working directory, the function source
 will be appended to the report.
@@ -14,8 +14,6 @@ The following directory contents would be typical for an autoreport project:
 
 ```
 .
-+-- html
-+-- header.m
 +-- preamble.tex
 +-- tikzpicture_1.tex
 +-- table_1.tex
